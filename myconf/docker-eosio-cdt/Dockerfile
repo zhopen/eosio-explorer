@@ -1,0 +1,13 @@
+FROM ubuntu:18.04
+
+RUN apt-get update && apt-get install -y wget sudo curl
+#RUN wget https://github.com/EOSIO/eosio.cdt/releases/download/v1.6.1/eosio.cdt_1.6.1-1_amd64.deb
+COPY eosio.cdt_1.6.1-1_amd64.deb .
+RUN apt-get update && sudo apt install -y ./eosio.cdt_1.6.1-1_amd64.deb
+RUN rm eosio.cdt_1.6.1-1_amd64.deb -f
+
+WORKDIR /opt/eosio/bin/
+
+COPY ./scripts /opt/eosio/bin/scripts
+COPY ./contracts /opt/eosio/bin/contracts
+
